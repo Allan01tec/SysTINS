@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysTINSApp", "SysTINSApp\SysTINSApp.csproj", "{99F7B5B3-6B85-4A31-9B02-A6732CAB1092}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysTINSClass", "SysTINSClass\SysTINSClass.csproj", "{50F758DF-037D-4953-ABE6-1A6DB04211B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99F7B5B3-6B85-4A31-9B02-A6732CAB1092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F7B5B3-6B85-4A31-9B02-A6732CAB1092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F7B5B3-6B85-4A31-9B02-A6732CAB1092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F7B5B3-6B85-4A31-9B02-A6732CAB1092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F758DF-037D-4953-ABE6-1A6DB04211B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F758DF-037D-4953-ABE6-1A6DB04211B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F758DF-037D-4953-ABE6-1A6DB04211B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F758DF-037D-4953-ABE6-1A6DB04211B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0B465BE-7479-42EA-88F0-663E6358A8A6}
+	EndGlobalSection
+EndGlobal
