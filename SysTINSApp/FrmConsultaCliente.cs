@@ -16,5 +16,10 @@ namespace SysTINSApp
         {
             InitializeComponent();
         }
+
+        private void FrmConsultaCliente_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
