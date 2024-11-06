@@ -8,37 +8,37 @@ namespace SysTINSClass
 {
     public class Categoria
     {
+
         public int Id { get; set; }
         public string? Nome { get; set; }
+        public string? Sigla { get; set; }
 
-        public int Cod_barras { get; set; }
-        public int Valor_unit { get; set; }
+        public Categoria() { } // método construtor (new)
 
-        public DateTime Data_cad {  get; set; } 
-        public string? Descricao { get; set; }
-        public int Desconto { get; set; }
-
-            public Categoria() { } // método construtor (new)
-
-            public Categoria(string? nome, Categoria categoria)
+        public Categoria(string? nome, string? sigla )
             {
+            
                 Nome = nome;
+                Sigla = sigla;
                
             }
-            public Categoria(int id, string? nome)
+            public Categoria(int id, string? nome, string? sigla)
             {
                 Id = id;
                 Nome = nome;
-          
+                Sigla= sigla;
             }
 
-            // inserir
-            public void Inserir()
+        // inserir
+        public void Inserir()
             {
                 var cmd = Banco.Abrir();
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = $"insert produtos (nome, Cod_barras, Valor_unit, Data_cad ) values ('{Nome}, {Cod_barras},{Valor_unit},{Data_cad},{Descricao},{Desconto}') ";
-                cmd.ExecuteNonQuery();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = $"sp_categoria_insert ";
+            cmd.Parameters.AddWithValue("spnome", Nome);
+            cmd.Parameters.AddWithValue("spsigla", Sigla);
+
+            cmd.ExecuteNonQuery();
                 cmd.Connection.Close();
             }
             // consultar por id
@@ -51,10 +51,8 @@ namespace SysTINSClass
                 var dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
-                    // = dr.GetInt32(0);
-                    // = dr.GetString(1);
-                    //= dr.GetString(2);
-                    categoria = new(dr.GetInt32(0), dr.GetString(1));
+                    categoria = new(dr.GetInt32(0), dr.GetString(1),
+                        dr.GetString(2));
                 }
                 cmd.Connection.Close();
                 return categoria;
@@ -62,33 +60,48 @@ namespace SysTINSClass
             // obter lista
             public static List<Categoria> ObterLista()
             {
-                List<Categoria> categoria = new();
-                var cmd = Banco.Abrir();
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = "select * from produtos order by nome asc";
-                var dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                categoria.Add(new(dr.GetInt32(0), dr.GetString(1)));
-                }
-                cmd.Connection.Close();
-                return categoria;
-            }
-            // atualizar
-            public bool Atualizar()
+            List<Categoria> categorias = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from categorias order by nome asc";
+            var dr = cmd.ExecuteReader();
+            while (dr.Read())
             {
-                var cmd = Banco.Abrir();
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = $"update produtos set nome = '{Nome}', where id = {Id}";
-                return cmd.ExecuteNonQuery() > 0 ? true : false;
+                categorias.Add( new(
+                    dr.GetInt32(0),
+                    dr.GetString(1),
+                    dr.GetString(2) 
+                    ));
+            }   
+            return categorias;
+        }
+        // atualizar
+        public bool Atualizar()
+            {
+            bool resposta = false;
+            var cmd = Banco.Abrir();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "sp_categoria_update";
+            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.Parameters.AddWithValue("spnome", Nome);
+            cmd.Parameters.AddWithValue("spsigla", Sigla);
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                cmd.Connection.Close();
+                resposta = true;
+            }
+            return resposta;
             }
             // deletar nivel
             public void Excluir()
             {
                 var cmd = Banco.Abrir();
-                cmd.CommandText = $"delete from produtos where id = {Id}";
-                cmd.ExecuteNonQuery();
-            }
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "sp_categoria_update";
+                cmd.Parameters.AddWithValue("spid", Id);
+            cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
+
+        }
 
         }
     }

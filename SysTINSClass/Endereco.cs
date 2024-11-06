@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SysTINSClass
 {
-    internal class Endereco
+    public class Endereco
     {
+        
     }
 }
