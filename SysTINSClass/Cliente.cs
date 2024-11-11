@@ -29,7 +29,7 @@ namespace SysTINSClass
             CPF = cpf;
             Telefone = telefone;
             Email = email;
-            DataNasc = dataNasc;
+            DataNasc = datanasc;
             DataCad = dataCad;
             Ativo = ativo;
             Enderecos = enderecos;
